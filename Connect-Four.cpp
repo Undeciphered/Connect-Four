@@ -21,6 +21,17 @@ class connect_four {
             }   
         }
         
+        void remove_disc(int row) {
+            row -= 1;
+            auto i = std::find_if(board[row].begin(), board[row].end(), [](char c){return c != '-';});
+            if(i != board[row].end()) {
+                *(i) = '-';   
+            } else {
+                return;   
+            }
+            
+        }
+        
         void print_board() {
             std::cout << "1 2 3 4 5 6 7 \n";
             for(int i = 0; i < 6; i++) {
@@ -37,6 +48,8 @@ int main() {
     connect_four mygame;
     mygame.print_board();
     mygame.place_disc(1);
+    mygame.print_board();
+    mygame.remove_disc(1);
     mygame.print_board();
     
     return 0;   
