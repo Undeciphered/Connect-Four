@@ -21,10 +21,13 @@ class connect_four {
             }   
         }
         
-        void print_row(int row) {
-            row -= 1;
-            for(char c : board[row]) {
-                std::cout << c;
+        void print_board() {
+            std::cout << "1 2 3 4 5 6 7 \n";
+            for(int i = 0; i < 6; i++) {
+                for(std::vector row : board) {
+                    std::cout << row[i] << ' ';
+                }
+                std::cout << '\n';
             }
             std::cout << '\n';
         } 
@@ -32,9 +35,9 @@ class connect_four {
 
 int main() {
     connect_four mygame;
-    mygame.print_row(1);
+    mygame.print_board();
     mygame.place_disc(1);
-    mygame.print_row(1);
+    mygame.print_board();
     
     return 0;   
 }
