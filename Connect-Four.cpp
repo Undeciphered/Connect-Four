@@ -32,6 +32,10 @@ class connect_four {
             
         }
         
+        char check_winner() {
+               
+        }
+        
         void print_board() {
             std::cout << "1 2 3 4 5 6 7 \n";
             for(int i = 0; i < 6; i++) {
