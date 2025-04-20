@@ -7,15 +7,7 @@ class connect_four {
         std::vector<std::vector<char>> board;
         
     public:
-        connect_four() : board(7, std::vector<char>(6, '-')) {
-            board[6] = {'-', '-', '-', '-', '-', '-'}; // 7
-            board[5] = {'-', '-', '-', '-', '-', '-'}; // 6
-            board[4] = {'-', '-', '-', '-', '-', '-'}; // 5
-            board[3] = {'-', '-', '-', 'X', '-', '-'}; // 4
-            board[2] = {'-', '-', '-', '-', '-', '-'}; // 3
-            board[1] = {'-', '-', 'X', 'X', 'X', 'X'}; // 2
-            board[0] = {'-', '-', '-', '-', '-', '-'}; // 1
-        }
+        connect_four() : board(7, std::vector<char>(6, '-')) {}
         
         void place_disc(int row) {
             row -= 1;
@@ -54,6 +46,16 @@ class connect_four {
                     
                 }
             }
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 4; j++) {
+                    if(board[j][i] == board[j+1][i+1] && board[j+1][i+1] == board[j+2][i+2] && board[j+2][i+2] == board[j+3][i+3] && board[j+3][i+3] != '-') {
+                        return board[j][i];   
+                    }
+                    if(board[j+3][i] == board[j+2][i+1] && board[j+2][i+1] == board[j+1][i+2] && board[j+1][i+2] == board[j][i+3] && board[j][i+3] != '-') {
+                        return board[j+3][i];   
+                    }
+                }
+            }
             return ' ';
         }
         
@@ -72,7 +74,6 @@ class connect_four {
 int main() {
     connect_four mygame;
     mygame.print_board();
-    std::cout << mygame.check_winner();
     
     return 0;   
 }
