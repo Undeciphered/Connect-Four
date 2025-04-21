@@ -59,6 +59,17 @@ class connect_four {
             return ' ';
         }
         
+        bool is_draw() {
+            if(check_winner() == ' ') {
+                for(std::vector column : board) {
+                    for(char cell : column) {
+                        if(cell == '-') {return false;}
+                    }
+                }
+            }
+            return true;
+        }
+        
         void print_board() {
             std::cout << "1 2 3 4 5 6 7 \n";
             for(int i = 0; i < 6; i++) {
