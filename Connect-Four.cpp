@@ -9,13 +9,13 @@ class connect_four {
     public:
         connect_four() : board(7, std::vector<char>(6, '-')) {}
         
-        void place_disc(int row) {
+        void place_disc(int row, char player) {
             row -= 1;
             auto i = std::find_if(board[row].begin(), board[row].end(), [](char c){return c != '-';});
             if(i != board[row].end()) {
-                *(i-1) = 'X';   
+                *(i-1) = player;   
             } else {
-                board[row].back() = 'X';   
+                board[row].back() = player;   
             }   
         }
         
@@ -80,6 +80,20 @@ class connect_four {
             }
             std::cout << '\n';
         } 
+        
+        void player_turn(char player) {
+            std::string input{""};
+            int column{0};
+            while(true) {
+                std::cin >> input;
+                if(std::all_of(input.begin(), input.end(), ::isdigit)) {
+                    column = stoi(input);
+                    if(column > 0 && column < 8) {
+                        place_disc(column, player);
+                    }
+                }
+            }
+        }
 };
 
 int main() {
