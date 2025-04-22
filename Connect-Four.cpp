@@ -71,14 +71,13 @@ class connect_four {
         }
         
         void print_board() {
-            std::cout << "1 2 3 4 5 6 7 \n";
+            std::cout << "\n1 2 3 4 5 6 7 \n";
             for(int i = 0; i < 6; i++) {
                 for(std::vector row : board) {
                     std::cout << row[i] << ' ';
                 }
                 std::cout << '\n';
             }
-            std::cout << '\n';
         } 
         
         void player_turn(char player) {
@@ -90,15 +89,29 @@ class connect_four {
                     column = stoi(input);
                     if(column > 0 && column < 8) {
                         place_disc(column, player);
+                        return;
                     }
                 }
+            }
+        }
+        
+        void play() {
+            while(true) { 
+                print_board();
+                if(check_winner() == 'X') {std::cout << "X wins!"; return;}
+                if(is_draw()) {std::cout << "its a draw!"; return;}
+                player_turn('O');
+                print_board();
+                if(check_winner() == 'O') {std::cout << "O wins!"; return;}
+                if(is_draw()) {std::cout << "its a draw!"; return;} 
+                player_turn('X');
             }
         }
 };
 
 int main() {
     connect_four mygame;
-    mygame.print_board();
+    mygame.play();
     
     return 0;   
 }
